@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app
+  labels:
+    app: node-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-rest
+  template:
+    metadata:
+      labels:
+        app: node-rest
+    spec:
+      containers:
+      - name: node-container
+        image: sandeephub/node-image
+        ports:
+        - containerPort: 3010
+          name: http
+          protocol: TCP
+
