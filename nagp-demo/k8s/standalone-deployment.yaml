@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: node-container
-        image: sandeephub/node-image
+        image: sandeephub/node-image:1
         ports:
         - containerPort: 3010
           name: http
