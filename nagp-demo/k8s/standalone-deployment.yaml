@@ -5,7 +5,7 @@ metadata:
   labels:
     app: node-app
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: node-rest
@@ -19,6 +19,37 @@ spec:
         image: sandeephub/node-image:1
         ports:
         - containerPort: 3010
+          name: http
+          protocol: TCP
+    - envFrom:
+      - configMapRef:
+        name: app-settings
+      - secretRef:
+        name: app-secrets
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-db
+  labels:
+    app: node-app-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-rest-db
+  template:
+    metadata:
+      labels:
+        app: node-rest-db
+    spec:
+      containers:
+      - name: node-container-db
+        image: mysql:latest
+        ports:
+        - containerPort: 3011
           name: http
           protocol: TCP
 

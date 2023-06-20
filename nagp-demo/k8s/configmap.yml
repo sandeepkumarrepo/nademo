@@ -1,0 +1,11 @@
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: app-settings
+  lable: app-settings
+  
+data:
+  HOST: ""
+  USER: ""
+  DB: "demodb"
+  
